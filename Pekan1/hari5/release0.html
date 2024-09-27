@@ -21,8 +21,7 @@
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" id="keyword" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="searchItem">Search</button>
             </form>
-            <button class="btn btn-primary" id="cart"><i class="fas fa-shopping-cart"></i>(<span
-                    id="counter">0</span>)</button>
+            <button class="btn btn-primary" id="cart"><i class="fas fa-shopping-cart"></i>(0)</button>
         </nav>
         <div class="row">
             <div class="row col-md-12 mt-2" id="listBarang">
@@ -56,7 +55,7 @@
                                 <h5 class="card-title" id="itemName">${item[1]}</h5>
                                 <p class="card-text" id="itemDesc">${item[3]}</p>
                                 <p class="card-text">Rp${item[2]}</p>
-                                <a href="#" class="btn btn-primary" id="addCart">Tambahkan ke keranjang</a>
+                                <a href="#" class="btn btn-primary" onclick="addCart()" id="addCart">Tambahkan ke keranjang</a>
                             </div>
                         </div>
                         </div>`
@@ -65,16 +64,8 @@
 
             listBarang.innerHTML = barang
 
-            // add cart
-            var buttonAddCart = document.querySelectorAll("#addCart")
-            buttonAddCart.forEach(buttonAdd => {
-                buttonAdd.addEventListener("click", function (event) {
-                    event.preventDefault()
-                    var counter = document.getElementById("counter")
-                    var currentCount = parseInt(counter.innerHTML)
-                    counter.innerHTML = currentCount + 1
-                })
-            });
+
+
         }
         printBarang(items)
 
@@ -92,7 +83,8 @@
             });
             return itemKeyword
         }
-        
+
+
 
         var form = document.getElementById("formItem")
         form.addEventListener("submit", function (event) {
@@ -104,6 +96,14 @@
             printBarang(terfilter)
         })
         // filter end
+
+        // add cart
+        var keranjang = document.getElementById("cart")
+        var nilaiKeranjang = keranjang.value
+        function addCart() {
+            nilaiKeranjang++
+            keranjang.innerHTML = `<button class="btn btn-primary" id="cart"><i class="fas fa-shopping-cart"></i>(${nilaiKeranjang})</button>`
+        }
 
 
 
